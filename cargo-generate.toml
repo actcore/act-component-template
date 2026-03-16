@@ -1,0 +1,11 @@
+[template]
+cargo_generate_version = ">=0.21"
+
+[placeholders.description]
+type = "string"
+prompt = "Component description"
+
+[placeholders.author]
+type = "string"
+prompt = "Author name"
+default = "ACT contributors"
