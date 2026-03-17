@@ -1,11 +1,11 @@
-# {{project-name}}
+# {{ project_name }}
 
-{{description}}
+{{ description }}
 
 ## Usage
 
 ```bash
-just init   # first time: fetch WIT deps + install prek hooks
+just init   # first time: fetch WIT deps
 just build  # build wasm component
 just test   # run e2e tests
 ```

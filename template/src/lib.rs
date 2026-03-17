@@ -1,9 +1,9 @@
 use act_sdk::prelude::*;
 
 #[act_component(
-    name = "{{project-name}}",
+    name = "{{ project_name }}",
     version = "0.1.0",
-    description = "{{description}}",
+    description = "{{ description }}",
 )]
 mod component {
     use super::*;

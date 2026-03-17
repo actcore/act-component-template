@@ -4,6 +4,24 @@ All notable changes to this template are documented here.
 
 Downstream components generated from this template should note which version they were created from and apply relevant entries when upgrading.
 
+## [0.3.0] - 2026-03-17
+
+### Changed
+- **Migrated from cargo-generate to Copier**: `copier copy` for new projects, `copier update` to sync existing components with template changes.
+- Template files moved into `template/` subdirectory (`_subdirectory: template` in copier.yml).
+- Jinja2 syntax replaces cargo-generate `{{ }}` placeholders.
+- Files with runtime `{{ }}` variables (justfile, hurl, CI) use `{% raw %}` blocks.
+- `_skip_if_exists` prevents overwriting `src/lib.rs`, `e2e/*.hurl`, `.gitignore` on update.
+- Clippy CI job added.
+
+### Removed
+- `cargo-generate.toml` — replaced by `copier.yml`
+
+### Migration from 0.2.0
+1. Install Copier: `pipx install copier`
+2. Create `.copier-answers.yml` in your component (see spec for format)
+3. Run `copier update` to pull future template changes
+
 ## [0.2.0] - 2026-03-17
 
 ### Changed
