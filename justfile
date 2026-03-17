@@ -4,9 +4,10 @@ port := `python3 -c 'import socket; s=socket.socket(socket.AF_INET, socket.SOCK_
 addr := "[::1]:" + port
 baseurl := "http://" + addr
 
-# Run after cargo-generate to set up deps and hooks
 init:
     wit-deps
+
+setup: init
     prek install
 
 build:
