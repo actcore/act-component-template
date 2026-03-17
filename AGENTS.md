@@ -60,7 +60,7 @@ rust-toolchain.toml     # Nightly + wasm32-wasip2 target
 just init    # wit-deps: fetch WIT dependencies
 just setup   # init + prek install (dev environment)
 just build   # cargo build --target wasm32-wasip2 --release
-just test    # build + act serve + hurl e2e tests
+just test    # act serve + hurl e2e tests (does NOT build, run just build first)
 ```
 
 ## Conventions
