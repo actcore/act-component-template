@@ -1,0 +1,12 @@
+name = "{{ project_name }}"
+version = "0.1.0"
+description = "{{ description }}"
+{% if needs_http or needs_filesystem %}
+
+{% if needs_http %}
+[capabilities."wasi:http"]
+{% endif %}
+{% if needs_filesystem %}
+[capabilities."wasi:filesystem"]
+{% endif %}
+{% endif %}

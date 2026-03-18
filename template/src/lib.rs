@@ -1,10 +1,8 @@
 use act_sdk::prelude::*;
 
-#[act_component(
-    name = "{{ project_name }}",
-    version = "0.1.0",
-    description = "{{ description }}",
-)]
+act_sdk::embed_skill!("skill/");
+
+#[act_component]
 mod component {
     use super::*;
 

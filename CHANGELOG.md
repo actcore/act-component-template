@@ -4,6 +4,33 @@ All notable changes to this template are documented here.
 
 Downstream components generated from this template should note which version they were created from and apply relevant entries when upgrading.
 
+## [0.4.0] - 2026-03-31
+
+### Added
+- **`act.toml` manifest**: Component metadata (name, version, description, capabilities) now lives in `act.toml`. The `#[act_component]` macro reads it automatically.
+- **`skill/SKILL.md`**: Embedded agent skill for tool discovery. Packed into `act:skill` WASM custom section via `embed_skill!`.
+- `act.toml` and `skill/*` added to `_skip_if_exists` (preserved on `copier update`).
+
+### Changed
+- **act-sdk 0.2.7**: Adds `act.toml` manifest support, typed `Capabilities` struct, `embed_skill!` macro.
+- **wit-bindgen 0.54**: Updated from 0.53.
+- `#[act_component]` no longer needs inline `name`/`version`/`description` — read from `act.toml`.
+- `src/lib.rs` now calls `act_sdk::embed_skill!("skill/")`.
+- Removed `check-json` from prek.toml (no JSON files in typical components).
+- Fixed stray `{% endraw %}` in `e2e/tools.hurl`.
+
+### Migration from 0.3.0
+1. Create `act.toml` in your component root:
+   ```toml
+   name = "my-component"
+   version = "0.1.0"
+   description = "My component description"
+   ```
+2. Create `skill/SKILL.md` with frontmatter (`name`, `description`, `metadata.act: {}`) and tool docs.
+3. Add `act_sdk::embed_skill!("skill/");` before `#[act_component]` in `src/lib.rs`.
+4. Simplify `#[act_component(name = "...", ...)]` to `#[act_component]`.
+5. Update `act-sdk` to `0.2.7` and `wit-bindgen` to `0.54` in `Cargo.toml`.
+
 ## [0.3.0] - 2026-03-17
 
 ### Changed
