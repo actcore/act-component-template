@@ -51,11 +51,9 @@ jobs:
       - uses: actions/download-artifact@v8
         with:
           name: component.wasm
-      - name: Test
-        run: |
-          npx @actcore/act run *.wasm --http --listen 3000 &
-          npx wait-on -t 180s http://[::1]:3000/info
-          npx @orangeopensource/hurl --test --variable "baseurl=http://[::1]:3000" e2e/*.hurl
+          path: target/wasm32-wasip2/release/
+      - uses: taiki-e/install-action@just
+      - run: just test
 
   fmt:
     name: Format
@@ -75,19 +73,18 @@ jobs:
       id-token: write
       attestations: write
     steps:
+      - uses: actions/checkout@v6
       - uses: actions/download-artifact@v8
         with:
           name: component.wasm
+          path: target/wasm32-wasip2/release/
       - uses: oras-project/setup-oras@v1
+      - uses: taiki-e/install-action@just
+      - run: npm i -g @actcore/act
       - run: echo ${{ secrets.GITHUB_TOKEN }} | oras login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Publish
         id: publish
-        run: |
-          VERSION=$(npx @actcore/act info *.wasm --format json | jq -r .version)
-          IMAGE="ghcr.io/${{ github.repository }}"
-          DIGEST=$(oras push "${IMAGE}:${VERSION}" *.wasm:application/wasm 2>&1 | grep -oP 'sha256:[a-f0-9]+')
-          echo "image=${IMAGE}" >> "$GITHUB_OUTPUT"
-          echo "digest=${DIGEST}" >> "$GITHUB_OUTPUT"
+        run: just publish
       - name: Attest
         if: steps.publish.outputs.digest != ''
         uses: actions/attest@v4
