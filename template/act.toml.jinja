@@ -1,9 +1,10 @@
+[std]
 {% if needs_http or needs_filesystem %}
 
 {% if needs_http %}
-[capabilities."wasi:http"]
+[std.capabilities."wasi:http"]
 {% endif %}
 {% if needs_filesystem %}
-[capabilities."wasi:filesystem"]
+[std.capabilities."wasi:filesystem"]
 {% endif %}
 {% endif %}
