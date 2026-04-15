@@ -21,7 +21,6 @@ just test    # run e2e tests
 ```
 copier.yml              # Copier config (questions, _subdirectory, _skip_if_exists)
 AGENTS.md               # This file (not copied to projects)
-CLAUDE.md -> AGENTS.md
 CHANGELOG.md            # Template version history (not copied)
 docs/                   # Specs and plans (not copied)
 template/               # _subdirectory — only this gets copied to new projects
